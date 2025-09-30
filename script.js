@@ -52,5 +52,21 @@ const scenes = {
             { text: "Intentar entrar al bosque", next: () => scenes.bosqueBloqueado }
         ]
     },
+    bosqueBloqueado: {
+        title: "Bosque con niebla",
+        image: "img/bosque.jpg",
+        text: () => {
+            if (state.linterna === "con_pilas") {
+                return "La linterna ilumina la espesura y puedes avanzar con seguridad.";
+            }
+            return "La niebla es demasiado espesa, no ves a un metro de distancia. Si entras sin luz acabarías perdido para siempre.";
+        },
+        options: [
+            ...(state.linterna === "con_pilas"
+                ? [{ text: "Avanzar al bosque", next: () => scenes.bosque }]
+                : []),
+            { text: "Volver al claro", next: () => scenes.inicio }
+        ]
+    },
 
 };
